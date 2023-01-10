@@ -13,9 +13,9 @@ code {
     monospace;
 }
 
-.App .excalidraw-container{
+.excalidraw-component .excalidraw-container{
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 90px);
 }
 
 /* .excalidraw .layer-ui__wrapper {
