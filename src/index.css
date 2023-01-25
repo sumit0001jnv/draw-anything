@@ -14,8 +14,9 @@ code {
 }
 
 .excalidraw-component .excalidraw-container{
-  width: 100vw;
+  width: calc(100vw - 32px);
   height: calc(100vh - 90px);
+  margin-left: 16px;
 }
 
 /* .excalidraw .layer-ui__wrapper {

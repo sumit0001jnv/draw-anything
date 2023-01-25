@@ -1,7 +1,7 @@
 import './App.css';
 // import { useState, useEffect } from "react";
 
-import Excalidraw from './pages/excalidraw/Excalidraw';
+import Excalidraw2 from './pages/excalidraw/Excalidraw';
 import SignIn from './pages/sign-in/SignInComponent';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path='/' element={<SignIn />} />
         <Route path='/sign-in' element={<SignIn />} />
-        <Route path='/draw' element={<Excalidraw />} />
+        <Route path='/draw' element={<Excalidraw2 />} />
       </Routes>
     </Router>
 
