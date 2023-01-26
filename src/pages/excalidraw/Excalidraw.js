@@ -10,7 +10,7 @@ export default function Excalidraw2(props) {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const [iframeUrl, setIframeUrl] = useState('https://draw.xbora.com/');
+    const [iframeUrl, setIframeUrl] = useState('https://draw.xbora.com/app');
     async function copySessionUrlToClipboard(text) {
         try {
             await navigator.clipboard.writeText(text || "");
@@ -86,7 +86,7 @@ export default function Excalidraw2(props) {
         console.log(searchParams.get('room'));
         // setSessionId('room=',searchParams.get('room'));
         if (searchParams.get('room')) {
-            setIframeUrl('https://draw.xbora.com/' + '#room=' + searchParams.get('room'));
+            setIframeUrl('https://draw.xbora.com/app' + '#room=' + searchParams.get('room'));
 
         }
         const handler = async (ev) => {
@@ -100,7 +100,7 @@ export default function Excalidraw2(props) {
                     })
 
                     // // setTimeout(()=>{
-                    setIframeUrl('https://draw.xbora.com/' + '#room=' + ev.data.link.split("room=")[1])
+                    setIframeUrl('https://draw.xbora.com/app' + '#room=' + ev.data.link.split("room=")[1])
                     // },2000)
                 }
 
