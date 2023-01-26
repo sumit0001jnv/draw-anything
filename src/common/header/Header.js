@@ -145,7 +145,7 @@ export default function Header(props) {
         break;
       }
       case "logout": {
-        navigate("/");
+        navigate("/sign-in");
         setlogin(false);
         setUserName("");
         setUserCategory("");

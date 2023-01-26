@@ -50,7 +50,7 @@ export default function SignIn() {
   }, []);
   const handleSubmit = (event) => {
     event.preventDefault();
-    let obj = { login: true, userName: '', pathname: '/', userCategory: '' }
+    // let obj = { login: true, userName: '', pathname: '/', userCategory: '' }
     let bodyFormData = new FormData();
     bodyFormData.append('username', formData.email);
     bodyFormData.append('password', formData.password);
