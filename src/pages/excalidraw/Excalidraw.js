@@ -93,7 +93,7 @@ export default function Excalidraw2(props) {
             if (typeof ev.data === 'object' && ev.data.message === 'excalidraw') {
                 console.log(ev.data.link);//https://draw.xbora.com/#room=ca61ccfedbdfb9bcde54,dfc0VFmVKtNnIGC3BU6_7A
                 if (ev.data.link.includes('room')) {
-                    await copyTextToSystemClipboard('https://draw.xbora.com/' + '?room=' + ev.data.link.split("room=")[1]);
+                    await copyTextToSystemClipboard('https://draw.xbora.com/#/draw' + '?room=' + ev.data.link.split("room=")[1]);
                     navigate({
                         pathname: '/draw',
                         search: '?' + 'room=' + ev.data.link.split("room=")[1]
