@@ -10,7 +10,7 @@ export default function Excalidraw2(props) {
     const navigate = useNavigate();
     const [searchParams, setSearchParams] = useSearchParams();
 
-    const [iframeUrl, setIframeUrl] = useState('https://draw.xbora.com/editor-app');
+    const [iframeUrl, setIframeUrl] = useState('https://draw.sieloapp.com/editor-app');
     async function copySessionUrlToClipboard(text) {
         try {
             await navigator.clipboard.writeText(text || "");
@@ -86,21 +86,21 @@ export default function Excalidraw2(props) {
         console.log(searchParams.get('room'));
         // setSessionId('room=',searchParams.get('room'));
         if (searchParams.get('room')) {
-            setIframeUrl('https://draw.xbora.com/editor-app' + '#room=' + searchParams.get('room'));
+            setIframeUrl('https://draw.sieloapp.com/editor-app' + '#room=' + searchParams.get('room'));
 
         }
         const handler = async (ev) => {
             if (typeof ev.data === 'object' && ev.data.message === 'excalidraw') {
-                console.log(ev.data.link);//https://draw.xbora.com/#room=ca61ccfedbdfb9bcde54,dfc0VFmVKtNnIGC3BU6_7A
+                console.log(ev.data.link);//https://draw.sieloapp.com/#room=ca61ccfedbdfb9bcde54,dfc0VFmVKtNnIGC3BU6_7A
                 if (ev.data.link.includes('room')) {
-                    await copyTextToSystemClipboard('https://draw.xbora.com/#/draw' + '?room=' + ev.data.link.split("room=")[1]);
+                    await copyTextToSystemClipboard('https://draw.sieloapp.com/#/draw' + '?room=' + ev.data.link.split("room=")[1]);
                     navigate({
                         pathname: '/draw',
                         search: '?' + 'room=' + ev.data.link.split("room=")[1]
                     })
 
                     // // setTimeout(()=>{
-                    setIframeUrl('https://draw.xbora.com/editor-app' + '#room=' + ev.data.link.split("room=")[1])
+                    setIframeUrl('https://draw.sieloapp.com/editor-app' + '#room=' + ev.data.link.split("room=")[1])
                     // },2000)
                 }
 
