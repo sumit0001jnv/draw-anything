@@ -77,7 +77,7 @@ export default function SignIn() {
       obj.userName = data.user_name;
 
       // dispatch(loginAction.logIn());
-      // dispatch(uiAction.showSnackbar({ type: 'success', message: res.data.message || 'User logged in successfully' }));
+      dispatch(uiAction.showSnackbar({ type: 'success', message: res.data.message || 'User logged in successfully' }));
       let store = localStorage.getItem('draw_anything_app');
       if (!store) {
         localStorage.setItem('draw_anything_app', '{}');
@@ -87,8 +87,8 @@ export default function SignIn() {
       parsedStore.userName = data.user_name;
       parsedStore.isLogin = true;
       parsedStore.userCategory = data.user_group;
-      parsedStore.user_id = data.user_uuid;
-      parsedStore.email = data.user_id;
+      parsedStore.user_id = data.user_id;
+      parsedStore.email = data.email_id;
       parsedStore.token = data.token;
       // parsedStore.user_org_name = data.user_org_name;
       // parsedStore.user_org_logo_url = data.user_org_logo_url;

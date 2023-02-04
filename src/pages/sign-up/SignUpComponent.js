@@ -43,7 +43,6 @@ export default function SignUpComponent() {
     password: '',
     email: '',
     mobile_number: '',
-    org_name: '',
     _confirmPassword: '',
     _showPassword: false,
     _showConfirmPassword: false,
@@ -58,8 +57,9 @@ export default function SignUpComponent() {
       return;
     }
 
-    if(!formData.password || !formData.username || !formData.email || !formData.org_name){
+    if(!formData.password || !formData.username || !formData.email){
       dispatch(uiAction.showSnackbar({ type: 'error', message: 'Manadatory field(s) missing' }));
+     debugger;
     }
 
     let bodyFormData = new FormData();
@@ -67,7 +67,6 @@ export default function SignUpComponent() {
     bodyFormData.append('email_id', formData.email);
     bodyFormData.append('password', formData.password);
     bodyFormData.append('mobile_number', formData.mobile_number);
-    // bodyFormData.append('org_name', formData.org_name);
 
     setLoading(true);
 
@@ -91,7 +90,6 @@ export default function SignUpComponent() {
             password: '',
             email: '',
             mobile_number: '',
-            org_name: '',
             _confirmPassword: '',
             _showPassword: false,
             _showConfirmPassword: false,
