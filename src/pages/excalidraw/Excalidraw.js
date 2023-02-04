@@ -11,6 +11,7 @@ export default function Excalidraw2(props) {
     const [searchParams, setSearchParams] = useSearchParams();
 
     const [iframeUrl, setIframeUrl] = useState('https://draw.sieloapp.com/editor-app');
+    // const [iframeUrl, setIframeUrl] = useState('http://localhost:3000/');
     async function copySessionUrlToClipboard(text) {
         try {
             await navigator.clipboard.writeText(text || "");
@@ -84,9 +85,15 @@ export default function Excalidraw2(props) {
 
     useEffect(() => {
         console.log(searchParams.get('room'));
+        const storageData=localStorage.getItem('draw_anything_app');
+        const token=JSON.parse(storageData || '{}').token || '';
+        console.log(storageData);
+        const iframe = document.querySelector("iframe");
+        iframe.contentWindow.postMessage({token,type:'token'},'*');
         // setSessionId('room=',searchParams.get('room'));
         if (searchParams.get('room')) {
             setIframeUrl('https://draw.sieloapp.com/editor-app' + '#room=' + searchParams.get('room'));
+            // setIframeUrl('http://localhost:3000/' + '#room=' + searchParams.get('room'));
 
         }
         const handler = async (ev) => {
@@ -165,7 +172,7 @@ export default function Excalidraw2(props) {
                 options={options}
             >
             </Excalidraw> */}
-            <iframe id="myFrame" src={iframeUrl} allow="clipboard-read self" height="100%" width="100%" className="excalidraw-container" title="Iframe Example"></iframe>
+            <iframe id="myFrame" src={iframeUrl} allow="clipboard-read self full" height="100%" width="100%" className="excalidraw-container" title="Iframe Example"></iframe>
         </div>
     </>
 }

@@ -21,11 +21,11 @@ import InputAdornment from '@mui/material/InputAdornment';
 import IconButton from '@mui/material/IconButton';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Visibility from '@mui/icons-material/Visibility';
-// import axios from '../../utility/api/apiWithoutToken';
+import axios from '../../utility/api/apiWithoutToken';
 // import axiosWithToken from '../../utility/api/api';
-// import { useDispatch } from 'react-redux';
-// import loginAction from '../../store/actions/loginAction';
-// import uiAction from '../../store/actions/uiAction';
+import { useDispatch } from 'react-redux';
+import loginAction from '../../store/actions/loginAction';
+import uiAction from '../../store/actions/uiAction';
 
 function Copyright(props) {
   return (
@@ -42,7 +42,7 @@ const theme = createTheme();
 export default function SignIn() {
 
   const navigate = useNavigate();
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const [formData, setformData] = useState({ email: '', password: '', showPassword: false });
   const [video, SetVideo] = useState('images/gifs/excalidraw.gif');
   useEffect(() => {
@@ -50,98 +50,98 @@ export default function SignIn() {
   }, []);
   const handleSubmit = (event) => {
     event.preventDefault();
-    // let obj = { login: true, userName: '', pathname: '/', userCategory: '' }
+    let obj = { login: true, userName: '', pathname: '/', userCategory: '' }
     let bodyFormData = new FormData();
-    bodyFormData.append('username', formData.email);
+    bodyFormData.append('email_id', formData.email);
     bodyFormData.append('password', formData.password);
     localStorage.setItem('draw_anything_app', JSON.stringify({userName:'Avinash Patel',email:formData.email,isLogin:true}));
 
-    navigate('/draw')
-    // axios({
-    //   method: 'post',
-    //   url: process.env.REACT_APP_BASE_URL + "/api/user-login",
-    //   data: bodyFormData,
-    //   headers: {
-    //     "Content-Type": "multipart/form-data",
-    //   },
-    //   // data: {
-    //   //   username: formData.email,
-    //   //   password: formData.password
-    //   // }
-    // }).then(async res => {
-    //   if (!res.data.status) {
-    //     dispatch(uiAction.showSnackbar({ type: 'error', message: res.data.message }));
-    //     return;
-    //   }
+    axios({
+      method: 'post',
+      url: process.env.REACT_APP_BASE_URL + "user-login",
+      data: bodyFormData,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+      // data: {
+      //   username: formData.email,
+      //   password: formData.password
+      // }
+    }).then(async res => {
+      if (!res.data.status) {
+        dispatch(uiAction.showSnackbar({ type: 'error', message: res.data.message }));
+        return;
+      }
 
-    //   const data = res.data.user_data;
-    //   obj.userName = data.user_name;
+      const data = res.data.user_data;
+      obj.userName = data.user_name;
 
-    //   // dispatch(loginAction.logIn());
-    //   // dispatch(uiAction.showSnackbar({ type: 'success', message: res.data.message || 'User logged in successfully' }));
-    //   let store = localStorage.getItem('draw_anything_app');
-    //   if (!store) {
-    //     localStorage.setItem('draw_anything_app', '{}');
-    //     store = localStorage.getItem('draw_anything_app');
-    //   }
-    //   let parsedStore = JSON.parse(store);
-    //   parsedStore.userName = data.user_name;
-    //   parsedStore.isLogin = true;
-    //   parsedStore.userCategory = data.user_group;
-    //   parsedStore.user_id = data.user_uuid;
-    //   parsedStore.email = data.user_id;
-    //   parsedStore.token = data.token;
-    //   parsedStore.user_org_name = data.user_org_name;
-    //   parsedStore.user_org_logo_url = data.user_org_logo_url;
-    //   parsedStore.user_org_video_url = data.user_org_video_url;
-    //   // await getProjectColorData(parsedStore);
-    //   dispatch(loginAction.setUser(parsedStore));
-    //   localStorage.setItem('draw_anything_app', JSON.stringify(parsedStore));
-    //   await getOrgData(parsedStore);
-    //   await getProjectColorData(parsedStore);
-    //   localStorage.setItem('draw_anything_app', JSON.stringify(parsedStore));
-    //   dispatch(loginAction.setUser(parsedStore));
-    //   console.error(parsedStore);
-    //   switch (parsedStore.userCategory) {
-    //     case 'super_admin': {
-    //       obj.pathname = '/organizations';
-    //       break;
-    //     }
-    //     case 'admin': {
-    //       obj.pathname = '/projects';
-    //       break;
-    //     }
-    //     case 'g2':
-    //       {
-    //         obj.pathname = '/g2-user';
-    //         break;
-    //       }
-    //     case 'g2b':
-    //       {
-    //         obj.pathname = '/g2b-user';
-    //         break;
-    //       }
-    //     case 'g3': {
-    //       obj.pathname = '/g3-user';
-    //       break;
-    //     }
-    //     case 'g4': {
-    //       obj.pathname = '/g4-user';
-    //       break;
-    //     }
-    //     default: {
-    //       obj.pathname = '/'
-    //     }
-    //   }
-    //   obj.userCategory = parsedStore.userCategory
-    //   navigate({
-    //     pathname: obj.pathname,
-    //     state: obj
-    //   })
-    // }).catch(err => {
-    //   console.log(err);
-    //   dispatch(uiAction.showSnackbar({ type: 'error', message: 'Something went wrong.Please try after some time' }));
-    // });
+      // dispatch(loginAction.logIn());
+      // dispatch(uiAction.showSnackbar({ type: 'success', message: res.data.message || 'User logged in successfully' }));
+      let store = localStorage.getItem('draw_anything_app');
+      if (!store) {
+        localStorage.setItem('draw_anything_app', '{}');
+        store = localStorage.getItem('draw_anything_app');
+      }
+      let parsedStore = JSON.parse(store);
+      parsedStore.userName = data.user_name;
+      parsedStore.isLogin = true;
+      parsedStore.userCategory = data.user_group;
+      parsedStore.user_id = data.user_uuid;
+      parsedStore.email = data.user_id;
+      parsedStore.token = data.token;
+      // parsedStore.user_org_name = data.user_org_name;
+      // parsedStore.user_org_logo_url = data.user_org_logo_url;
+      // parsedStore.user_org_video_url = data.user_org_video_url;
+      // await getProjectColorData(parsedStore);
+      dispatch(loginAction.setUser(parsedStore));
+      localStorage.setItem('draw_anything_app', JSON.stringify(parsedStore));
+      // await getOrgData(parsedStore);
+      // await getProjectColorData(parsedStore);
+      localStorage.setItem('draw_anything_app', JSON.stringify(parsedStore));
+      dispatch(loginAction.setUser(parsedStore));
+      console.error(parsedStore);
+      // switch (parsedStore.userCategory) {
+      //   case 'super_admin': {
+      //     obj.pathname = '/organizations';
+      //     break;
+      //   }
+      //   case 'admin': {
+      //     obj.pathname = '/projects';
+      //     break;
+      //   }
+      //   case 'g2':
+      //     {
+      //       obj.pathname = '/g2-user';
+      //       break;
+      //     }
+      //   case 'g2b':
+      //     {
+      //       obj.pathname = '/g2b-user';
+      //       break;
+      //     }
+      //   case 'g3': {
+      //     obj.pathname = '/g3-user';
+      //     break;
+      //   }
+      //   case 'g4': {
+      //     obj.pathname = '/g4-user';
+      //     break;
+      //   }
+      //   default: {
+      //     obj.pathname = '/'
+      //   }
+      // }
+      obj.userCategory = parsedStore.userCategory;
+      // navigate('/draw')
+      navigate({
+        pathname: '/draw',
+        state: obj
+      })
+    }).catch(err => {
+      console.log(err);
+      dispatch(uiAction.showSnackbar({ type: 'error', message: 'Something went wrong.Please try after some time' }));
+    });
 
 
   };
